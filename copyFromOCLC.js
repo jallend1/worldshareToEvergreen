@@ -1,4 +1,5 @@
 javascript: (function () {
+  // Sets up addressObject with names matching OCLC address fields so it can be iterated through later
   let addressObject = {
     attention: null,
     line1: null,
@@ -123,22 +124,30 @@ javascript: (function () {
     return addressString;
   };
 
-  const addressString = createAddressString();
-  const requestNumber = document.querySelector('.accordionRequestDetailsRequestId').textContent;
-  const title = document.querySelector('span[data="resource.title"]').textContent;
-  const patronID = document.querySelector('input[data="requester.patron.userId"]').value;
-  
+  // Bundles all pertinent information into an object
+  const compileRequestData = () => {
+    const addressString = createAddressString();
+    const requestNumber = document.querySelector(
+      '.accordionRequestDetailsRequestId'
+    ).textContent;
+    const title = document.querySelector(
+      'span[data="resource.title"]'
+    ).textContent;
+    const patronID = document.querySelector(
+      'input[data="requester.patron.userId"]'
+    ).value;
 
-  const requestData = [
-    addressString, requestNumber, title, patronID
-  ];
-
-  const copyToClipboard = (data) => {
-    navigator.clipboard.writeText(data);
+    return [{ addressString }, { requestNumber }, { title }, { patronID }];
   };
 
-  copyToClipboard(requestData);
+  const convertDataToJSON = (data) => {
+    return JSON.stringify(data);
+  };
+
+  const compiledData = compileRequestData();
+  const stringifiedData = convertDataToJSON(compiledData);
+  navigator.clipboard.writeText(stringifiedData);
 
   console.log(requestData);
-
+  console.log(stringifiedData);
 })();

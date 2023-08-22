@@ -1,7 +1,7 @@
-const titleInput = document.querySelector('#precat-title-input');
-const callNumberInput = document.querySelector('#precat-call-number-input');
-const patronBarcodeInput = document.querySelector('#precat-patron-barcode-input');
-const kclsBarcodeInput = document.querySelector('#precat-kcls-barcode-input');
+const titleInput = document.querySelector('#title-input');
+const callNumberInput = document.querySelector('#call-number-input');
+const patronBarcodeInput = document.querySelector('#patron-barcode-input');
+const kclsBarcodeInput = document.querySelector('#item-barcode-input');
 
 const updateTitle = () => {
     titleInput.value = 'Hello There';
@@ -12,3 +12,9 @@ const updateTitle = () => {
     titleInput.dispatchEvent(event);
 };
 
+const extractArrayFromClipboard = () => {
+    navigator.clipboard.readText().then((text) => {
+        console.log(text);
+        console.log(array);
+    });
+}
