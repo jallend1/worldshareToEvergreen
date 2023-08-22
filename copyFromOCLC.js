@@ -124,6 +124,11 @@ javascript: (function () {
   };
 
   const addressString = createAddressString();
+  const requestNumber = document.querySelector('.accordionRequestDetailsRequestId').textContent;
+  const title = document.querySelector('span[data="resource.title"]').textContent;
+  const patronID = document.querySelector('#patron-details-221135695-patronId').value;
 
-  navigator.clipboard.writeText(addressString);
+  const requestData = [
+    addressString, requestNumber, title, patronID
+  ];
 })();
