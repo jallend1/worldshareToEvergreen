@@ -126,9 +126,19 @@ javascript: (function () {
   const addressString = createAddressString();
   const requestNumber = document.querySelector('.accordionRequestDetailsRequestId').textContent;
   const title = document.querySelector('span[data="resource.title"]').textContent;
-  const patronID = document.querySelector('#patron-details-221135695-patronId').value;
+  const patronID = document.querySelector('input[data="requester.patron.userId"]').value;
+  
 
   const requestData = [
     addressString, requestNumber, title, patronID
   ];
+
+  const copyToClipboard = (data) => {
+    navigator.clipboard.writeText(data);
+  };
+
+  copyToClipboard(requestData);
+
+  console.log(requestData);
+
 })();
