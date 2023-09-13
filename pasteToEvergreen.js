@@ -1,15 +1,6 @@
-const titleInput = document.querySelector('#title-input');
-const callNumberInput = document.querySelector('#callnumber-input');
-const patronBarcodeInput = document.querySelector('#patron-barcode-input');
-const kclsBarcodeInput = document.querySelector('#item-barcode-input');
-const addressInput = document.querySelector('textarea');
-
-let title;
-let requestNumber;
-let patronID;
-let addressString;
-
+(function () {
 const updateTitle = (title) => {
+  const titleInput = document.querySelector('#title-input');
   titleInput.value = 'ILL Title - ' + title;
   const event = new Event('input', {
     bubbles: true,
@@ -19,6 +10,7 @@ const updateTitle = (title) => {
 };
 
 const updateCallNumber = (requestNumber) => {
+  const callNumberInput = document.querySelector('#callnumber-input');
   callNumberInput.value = 'IL' + requestNumber;
   const event = new Event('input', {
     bubbles: true,
@@ -28,6 +20,7 @@ const updateCallNumber = (requestNumber) => {
 };
 
 const updatePatronBarcode = (patronID) => {
+  const patronBarcodeInput = document.querySelector('#patron-barcode-input');
   patronBarcodeInput.value = patronID;
   const event = new Event('input', {
     bubbles: true,
@@ -37,6 +30,7 @@ const updatePatronBarcode = (patronID) => {
 };
 
 const updatePatronAddress = (addressString) => {
+  const addressInput = document.querySelector('textarea');
   addressInput.value = addressString;
   const event = new Event('input', {
     bubbles: true,
@@ -47,15 +41,16 @@ const updatePatronAddress = (addressString) => {
 
 const extractArrayFromClipboard = () => {
   navigator.clipboard.readText().then((text) => {
-    console.log(text);
-    console.log(addressInput);
     const array = JSON.parse(text);
-    console.log(array[0].addressString);
     updateTitle(array[2].title);
     updateCallNumber(array[1].requestNumber);
     updatePatronBarcode(array[3].patronID);
     updatePatronAddress(array[0].addressString);
+    const kclsBarcodeInput = document.querySelector('#item-barcode-input');
+    kclsBarcodeInput.focus();
+    console.log(array);
   });
 };
 
 extractArrayFromClipboard();
+})();
