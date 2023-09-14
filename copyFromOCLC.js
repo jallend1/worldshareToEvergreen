@@ -127,17 +127,14 @@ javascript: (function () {
   // Bundles all pertinent information into an object
   const compileRequestData = () => {
     const addressString = createAddressString();
-    const requestNumber = document.querySelector(
-      '.accordionRequestDetailsRequestId'
-    ).textContent;
-    const title = document.querySelector(
-      'span[data="resource.title"]'
-    ).textContent;
-    const patronID = document.querySelector(
-      'input[data="requester.patron.userId"]'
-    ).value;
+    const allRequestNumbers = document.querySelectorAll('.accordionRequestDetailsRequestId');
+    const requestNumber = allRequestNumbers[allRequestNumbers.length - 1].textContent;
+    const allTitles = document.querySelectorAll('span[data="resource.title"]');
+    const title = allTitles[allTitles.length - 1].textContent;
+    const allPatronIDs = document.querySelectorAll('input[data="requester.patron.userId"]');
+    const patronID = allPatronIDs[allPatronIDs.length - 1].value;
 
-    return [{ addressString }, { requestNumber }, { title }, { patronID }];
+    return [ {addressString} ,  {requestNumber} ,  {title} ,  {patronID}];
   };
 
   const convertDataToJSON = (data) => {
@@ -146,8 +143,6 @@ javascript: (function () {
 
   const compiledData = compileRequestData();
   const stringifiedData = convertDataToJSON(compiledData);
-  navigator.clipboard.writeText(stringifiedData);
 
-  console.log(requestData);
-  console.log(stringifiedData);
+  navigator.clipboard.writeText(stringifiedData);
 })();
