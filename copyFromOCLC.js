@@ -100,6 +100,7 @@ javascript: (function () {
   // Format addressObject for mail label
   const createAddressString = () => {
     let addressString = '';
+    if(isBLP()) addressString += extractDueDate() + '\n\n';
     Object.keys(addressObject).forEach((key) => {
       switch (key) {
         case 'attention':
@@ -125,9 +126,15 @@ javascript: (function () {
   };
 
   // Checks lender string to see if it is BLP 
-  const isBLPtest = () => {
+  const isBLP = () => {
     const nodeList = document.querySelector('span[data="lenderString.currentSupplier.symbol"]');
     return nodeList.innerText ? nodeList.innerText === 'BLP' : false;
+  };
+
+  // Extracts OCLC Due Date
+  const extractDueDate = () => {
+    const nodeList = document.querySelector('span[data="returning.originalDueToSupplier"]');
+    return nodeList.innerText ? 'OCLC Due Date: ' + nodeList.innerText : null;
   };
 
 
