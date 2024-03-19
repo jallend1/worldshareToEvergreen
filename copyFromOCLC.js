@@ -124,6 +124,13 @@ javascript: (function () {
     return addressString;
   };
 
+  // Checks lender string to see if it is BLP 
+  const isBLPtest = () => {
+    const nodeList = document.querySelector('span[data="lenderString.currentSupplier.symbol"]');
+    return nodeList.innerText ? nodeList.innerText === 'BLP' : false;
+  };
+
+
   // Bundles all pertinent information into an object
   const compileRequestData = () => {
     const addressString = createAddressString();
