@@ -101,6 +101,7 @@ javascript: (function () {
   const createAddressString = () => {
     let addressString = '';
     if(isBLP()) addressString += extractDueDate() + '\n\n';
+    if(isWCCLS()) addressString += WCCLSprompt() + '\n\n';
     Object.keys(addressObject).forEach((key) => {
       switch (key) {
         case 'attention':
@@ -141,6 +142,12 @@ javascript: (function () {
     const nodeList = document.querySelector('span[data="lenderString.currentSupplier.symbol"]');
     return nodeList.innerText ? nodeList.innerText === 'OQX' : false;
   };
+
+  const WCCLSprompt = () => {
+    return 'WCCLS code: ' + prompt('Whoa there! This is from WCCLS! Please write the 4-digit code from their paperwork. (Also can be found as the last four digits of THEIR barcode)');
+  };
+
+
 
   // Bundles all pertinent information into an object
   const compileRequestData = () => {
