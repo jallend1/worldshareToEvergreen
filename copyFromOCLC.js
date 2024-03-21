@@ -138,16 +138,18 @@ javascript: (function () {
     return nodeList.innerText ? 'OCLC Due Date: ' + nodeList.innerText : null;
   };
 
+// TODO: Combine the check lender functions for BLP and OQX into one with lender string as an argument
+
+// Checks if lender string is associated with WCCLS
   const isWCCLS = () => {
     const nodeList = document.querySelector('span[data="lenderString.currentSupplier.symbol"]');
     return nodeList.innerText ? nodeList.innerText === 'OQX' : false;
   };
 
+  // Prompts user for WCCLS barcode
   const WCCLSprompt = () => {
-    return 'WCCLS code: ' + prompt('Whoa there! This is from WCCLS! Please write the 4-digit code from their paperwork. (Also can be found as the last four digits of THEIR barcode)');
+    return 'WCCLS barcode: ' + prompt('Whoa there! This is from WCCLS! Please write the 4-digit code from their paperwork. (Also can be found as the last four digits of THEIR barcode)');
   };
-
-
 
   // Bundles all pertinent information into an object
   const compileRequestData = () => {
