@@ -137,6 +137,10 @@ javascript: (function () {
     return nodeList.innerText ? 'OCLC Due Date: ' + nodeList.innerText : null;
   };
 
+  const isWCCLS = () => {
+    const nodeList = document.querySelector('span[data="lenderString.currentSupplier.symbol"]');
+    return nodeList.innerText ? nodeList.innerText === 'OQX' : false;
+  };
 
   // Bundles all pertinent information into an object
   const compileRequestData = () => {
