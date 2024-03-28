@@ -100,6 +100,7 @@ javascript: (function () {
   // Format addressObject for mail label
   const createAddressString = () => {
     let addressString = '';
+    const lender = document.querySelector('span[data="lenderString.currentSupplier.symbol"]');
     if(isBLP()) addressString += extractDueDate() + '\n\n';
     if(isWCCLS()) addressString += WCCLSprompt() + '\n\n';
     Object.keys(addressObject).forEach((key) => {
@@ -142,13 +143,19 @@ javascript: (function () {
 
 // Checks if lender string is associated with WCCLS
   const isWCCLS = () => {
-    const nodeList = document.querySelector('span[data="lenderString.currentSupplier.symbol"]');
-    return nodeList.innerText ? nodeList.innerText === 'OQX' : false;
+    const lenderString = document.querySelector('span[data="lenderString.currentSupplier.symbol"]');
+    return lenderString.innerText ? lenderString.innerText === 'OQX' : false;
   };
 
   // Prompts user for WCCLS barcode
   const WCCLSprompt = () => {
-    return 'WCCLS barcode: ' + prompt('Whoa there! This is from WCCLS! Please write the 4-digit code from their paperwork. (Also can be found as the last four digits of THEIR barcode)');
+    let addressField = '';
+    const title = document.querySelector('span[data="resource.title"]').innerText;
+    if(title) addressField = 'Title: ' + title + '\n';
+    const barcode = 'WCCLS barcode: ' + prompt('Whoa there! This is from WCCLS! Please write the 4-digit code from their paperwork. (Also can be found as the last four digits of THEIR barcode)');
+    if(barcode) addressField += barcode;
+    return addressField;
+    // return 'WCCLS barcode: ' + prompt('Whoa there! This is from WCCLS! Please write the 4-digit code from their paperwork. (Also can be found as the last four digits of THEIR barcode)');
   };
 
   // Bundles all pertinent information into an object
