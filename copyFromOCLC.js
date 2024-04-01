@@ -150,9 +150,11 @@ javascript: (function () {
   // Prompts user for WCCLS barcode
   const WCCLSprompt = () => {
     let addressField = '';
-    let title = document.querySelector('span[data="resource.title"]').innerText;
+    let barcode = '';
+    let title = '';
+    title = document.querySelector('span[data="resource.title"]').innerText;
     if(title) addressField = 'Title: ' + title + '\n';
-    const barcode = 'WCCLS barcode: ' + prompt('Whoa there! This is from WCCLS! Please write the 4-digit code from their paperwork. (Also can be found as the last four digits of THEIR barcode)');
+    barcode = 'WCCLS barcode: ' + prompt('Whoa there! This is from WCCLS! Please write the 4-digit code from their paperwork. (Also can be found as the last four digits of THEIR barcode)');
     if(barcode) addressField += barcode;
     return addressField;
     // return 'WCCLS barcode: ' + prompt('Whoa there! This is from WCCLS! Please write the 4-digit code from their paperwork. (Also can be found as the last four digits of THEIR barcode)');
